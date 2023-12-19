@@ -29,16 +29,6 @@ class BreweryTableCell: UITableViewCell {
     @IBOutlet weak var street: UILabel!
     let borderColor: CGColor = Constants.mainColor
     
-    
-    override func prepareForReuse() {
-        self.phoneLabelView.isHidden = true
-        self.webLabelView.isHidden = true
-        self.countryLabelView.isHidden = true
-        self.stateLabelView.isHidden = true
-        self.cityLabelView.isHidden = true
-        self.streetLabelView.isHidden = true
-    }
-    
     func setup(brewery: Brewery){
         setupView()
         self.name.forEach { label in
