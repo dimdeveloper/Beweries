@@ -7,26 +7,28 @@ class MapViewController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
     
     var selectedBrewery: Brewery?
-    override func viewDidLoad() {
     
+    override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = self.selectedBrewery?.name
         guard let brewery = self.selectedBrewery, let latitudeValue = brewery.latitude, let latitude = Double(latitudeValue), let longtitudeValue = brewery.longtitude, let longtitude = Double(longtitudeValue) else {return}
-        
-        
-        let initialLocation = CLLocation(latitude: latitude, longitude: longtitude)
-      mapView.centerToLocation(initialLocation)
-      
-      let point = Pointer(
-        title: brewery.name,
-        coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longtitude))
-      mapView.addAnnotation(point)
+        self.setupLocation(brewery: brewery, latitude: latitude, longtitude: longtitude)
   }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNeedsStatusBarAppearanceUpdate()
         navigationItem.title = "Breweries"
+    }
+    
+    private func setupLocation(brewery: Brewery, latitude: Double, longtitude: Double){
+        let initialLocation = CLLocation(latitude: latitude, longitude: longtitude)
+        mapView.centerToLocation(initialLocation)
+        
+        let point = MapPointer(
+            title: brewery.name,
+            coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longtitude))
+        mapView.addAnnotation(point)
     }
 }
 

@@ -64,6 +64,7 @@ class MainViewController: UIViewController {
             self.fetchBreweries(url: url)
         } else {
             self.allBreweries = self.db?.retrieveBreweries() ?? []
+            self.noBreweriesInfo.isHidden = self.breweriesToShow.isEmpty ? false : true
             self.tableView.reloadData()
             self.fetchBreweries(url: url)
         }

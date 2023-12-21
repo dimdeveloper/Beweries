@@ -8,7 +8,7 @@
 import Foundation
 import MapKit
 
-class Pointer: NSObject, MKAnnotation {
+class MapPointer: NSObject, MKAnnotation {
   let title: String?
   let coordinate: CLLocationCoordinate2D
 
