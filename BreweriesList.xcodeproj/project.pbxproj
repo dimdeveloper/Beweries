@@ -20,6 +20,8 @@
 		30BD8FA22B2B8FE000EB2DBA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30BD8FA12B2B8FE000EB2DBA /* Assets.xcassets */; };
 		30BD8FA52B2B8FE000EB2DBA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30BD8FA32B2B8FE000EB2DBA /* LaunchScreen.storyboard */; };
 		30D604F92B31BA8400BAF7AF /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D604F82B31BA8400BAF7AF /* NetworkMonitor.swift */; };
+		30D604FB2B325F4800BAF7AF /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D604FA2B325F4800BAF7AF /* MapViewController.swift */; };
+		30D604FF2B32681F00BAF7AF /* Pointer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D604FE2B32681F00BAF7AF /* Pointer.swift */; };
 		F3B95CE8127FD7E9A1C6545D /* Pods_BreweriesList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC920DC70B971AD00E41BA45 /* Pods_BreweriesList.framework */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +41,8 @@
 		30BD8FA42B2B8FE000EB2DBA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		30BD8FA62B2B8FE000EB2DBA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		30D604F82B31BA8400BAF7AF /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
+		30D604FA2B325F4800BAF7AF /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		30D604FE2B32681F00BAF7AF /* Pointer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pointer.swift; sourceTree = "<group>"; };
 		4D56355C161BC88812E52BF3 /* Pods-BreweriesList.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BreweriesList.release.xcconfig"; path = "Target Support Files/Pods-BreweriesList/Pods-BreweriesList.release.xcconfig"; sourceTree = "<group>"; };
 		DC920DC70B971AD00E41BA45 /* Pods_BreweriesList.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BreweriesList.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB1120BC8B10427CBD120C9C /* Pods-BreweriesList.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BreweriesList.debug.xcconfig"; path = "Target Support Files/Pods-BreweriesList/Pods-BreweriesList.debug.xcconfig"; sourceTree = "<group>"; };
@@ -59,6 +63,8 @@
 		30BD8F8C2B2B8FDD00EB2DBA = {
 			isa = PBXGroup;
 			children = (
+				30D604FE2B32681F00BAF7AF /* Pointer.swift */,
+				30D604FA2B325F4800BAF7AF /* MapViewController.swift */,
 				30D604F82B31BA8400BAF7AF /* NetworkMonitor.swift */,
 				3069E0DE2B2FB920003F43EE /* IowanOldStyleBT.ttf */,
 				3069E0E02B2FBE49003F43EE /* IowanOldStyleBoldBT.ttf */,
@@ -245,6 +251,8 @@
 				30BD8F992B2B8FDD00EB2DBA /* AppDelegate.swift in Sources */,
 				30BD8F9B2B2B8FDD00EB2DBA /* SceneDelegate.swift in Sources */,
 				30D604F92B31BA8400BAF7AF /* NetworkMonitor.swift in Sources */,
+				30D604FB2B325F4800BAF7AF /* MapViewController.swift in Sources */,
+				30D604FF2B32681F00BAF7AF /* Pointer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -20,7 +20,7 @@ class BreweryDataBase {
     let stateProvince = Expression<String?>("state_province")
     let postalCode = Expression<String?>("postal_code")
     let country = Expression<String?>("country")
-    let longtitude = Expression<String?>("longtitude")
+    let longtitude = Expression<String?>("longitude")
     let latitude = Expression<String?>("latitude")
     let phone = Expression<String?>("phone")
     let websiteUrl = Expression<String?>("website_url")

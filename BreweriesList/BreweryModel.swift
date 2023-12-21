@@ -35,7 +35,7 @@ struct Brewery: Codable {
         case stateProvince = "state_province"
         case postalCode = "postal_code"
         case country
-        case longtitude
+        case longtitude = "longitude"
         case latitude
         case phone
         case websiteUrl = "website_url"
