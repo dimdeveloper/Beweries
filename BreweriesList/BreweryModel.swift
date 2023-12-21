@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 struct Brewery: Codable {
     let id: String
     let name: String

@@ -10,7 +10,7 @@ import SQLite
 import Network
 
 protocol ShowOnMap: AnyObject {
-    func didselect(breweryId: String)
+    func didSelect(breweryId: String)
 }
 
 struct Constants {
@@ -37,15 +37,14 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         searchBar.searchTextField.backgroundColor = .white
-        
         self.noBreweriesInfo.isHidden = true
         searchBar.delegate = self
         tableView.dataSource = self
         tableView.delegate = self
-        db = BreweryDataBase.shared
-        self.getBreweries(with: Constants.url)
         self.tableView.keyboardDismissMode = .onDrag
         self.dismissKeyboard()
+        db = BreweryDataBase.shared
+        self.getBreweries(with: Constants.url)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -54,25 +53,17 @@ class MainViewController: UIViewController {
         navigationItem.title = "Breweries"
     }
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        .lightContent
-    }
-    
     func getBreweries(with url: String) {
+        self.allBreweries = self.db?.retrieveBreweries() ?? []
+        self.noBreweriesInfo.isHidden = self.breweriesToShow.isEmpty ? false : true
+        self.tableView.reloadData()
+        
         guard let url = URL(string: url) else {return}
-        if NetworkMonitor.shared.isConnected {
-            self.fetchBreweries(url: url)
-        } else {
-            self.allBreweries = self.db?.retrieveBreweries() ?? []
-            self.noBreweriesInfo.isHidden = self.breweriesToShow.isEmpty ? false : true
-            self.tableView.reloadData()
-            self.fetchBreweries(url: url)
-        }
+        self.fetchBreweries(url: url)
     }
     
     private func fetchBreweries(url: URL){
         let task = URLSession.shared.dataTask(with: url) { data, _, error in
-            
             DispatchQueue.main.async {
                 guard error == nil, let data = data else {
                     print("No data received:", error ?? URLError(.badServerResponse))
@@ -97,7 +88,6 @@ class MainViewController: UIViewController {
                     if !breweries.isEmpty {
                         self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
                     }
-                    
                 } catch let parseError {
                     print("Parsing error:", parseError, String(describing: String(data: data, encoding: .utf8)))
                 }
@@ -114,22 +104,13 @@ class MainViewController: UIViewController {
             self.breweriesToShow = self.allBreweries
             tableView.reloadData()
         } else {
-            if NetworkMonitor.shared.isConnected {
-                guard let searchURL = components?.url else {
-                    print("Unable to build URL")
-                    return
-                }
+            if NetworkMonitor.shared.isConnected, let searchURL = components?.url {
                 fetchBreweries(url: searchURL)
             } else {
                 self.breweriesToShow = allBreweries.filter {$0.name.lowercased().contains(searchText.lowercased())}
                 tableView.reloadData()
             }
         }
-        
-        if !self.breweriesToShow.isEmpty {
-            self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
-        }
-        self.noBreweriesInfo.isHidden = self.breweriesToShow.isEmpty ? false : true
     }
 }
 
@@ -151,14 +132,19 @@ extension MainViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         self.isSearching = true
         self.searchForBrewery(searchText: searchText)
+        if !self.breweriesToShow.isEmpty {
+            self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
+        }
+        self.noBreweriesInfo.isHidden = self.breweriesToShow.isEmpty ? false : true
     }
+    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
     }
 }
 
 extension MainViewController: ShowOnMap {
-    func didselect(breweryId: String) {
+    func didSelect(breweryId: String) {
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         guard let mapView = storyBoard.instantiateViewController(withIdentifier: "MapViewController") as? MapViewController else {return}
         mapView.selectedBrewery = breweriesToShow.filter {$0.id == breweryId}.first
@@ -172,6 +158,7 @@ extension UIViewController {
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
     }
+    
     @objc private func dismissKeyboardTouchOutside() {
         view.endEditing(true)
     }

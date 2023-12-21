@@ -35,13 +35,12 @@ class BreweryTableCell: UITableViewCell {
     weak var delegate: ShowOnMap?
     
     func setup(brewery: Brewery){
-        setupView()
-        setupShowOnMapButton(brewery: brewery)
-        
+        self.showOnMapButtonView.isHidden = true
+        self.brewery = brewery
         self.name.forEach { label in
             label.text = brewery.name
         }
-        self.brewery = brewery
+        
         self.phone.text = brewery.phone
         self.country.text = brewery.country
         self.state.text = brewery.state
@@ -53,17 +52,12 @@ class BreweryTableCell: UITableViewCell {
         self.stateLabelView.update(with: brewery.state)
         self.cityLabelView.update(with: brewery.city)
         self.streetLabelView.update(with: brewery.street)
-        self.webLink.textContainerInset = .zero
-
-        guard let webLink = brewery.websiteUrl else {return}
-        let attributedString = NSMutableAttributedString(string: brewery.websiteUrl ?? "")
-        attributedString.addAttribute(.link, value: webLink, range: NSRange(webLink.startIndex..., in: webLink))
-            
-        self.webLink.attributedText = attributedString
+        setupWebLink()
+        setupContainersView()
+        setupShowOnMapButton(brewery: brewery)
     }
     
-    private func setupView(){
-        
+    private func setupContainersView(){
         headerView.layer.cornerRadius = 12
         infoView.layer.cornerRadius = 12
         headerView.layer.borderWidth = 1
@@ -72,9 +66,17 @@ class BreweryTableCell: UITableViewCell {
         infoView.layer.borderColor = borderColor
     }
     
+    private func setupWebLink() {
+        guard let webLink = brewery?.websiteUrl else {return}
+        self.webLink.textContainerInset = .zero
+        let attributedString = NSMutableAttributedString(string: brewery?.websiteUrl ?? "")
+        attributedString.addAttribute(.link, value: webLink, range: NSRange(webLink.startIndex..., in: webLink))
+            
+        self.webLink.attributedText = attributedString
+    }
+    
     private func setupShowOnMapButton(brewery: Brewery){
         guard let latitudeValue = brewery.latitude, let _ = Double(latitudeValue), let longtitudeValue = brewery.longtitude, let _ = Double(longtitudeValue) else {
-            self.showOnMapButtonView.isHidden = true
             return
         }
         self.showOnMapButtonView.isHidden = false
@@ -85,7 +87,7 @@ class BreweryTableCell: UITableViewCell {
         guard let brewery = brewery else {
             return
         }
-        delegate?.didselect(breweryId: brewery.id)
+        delegate?.didSelect(breweryId: brewery.id)
     }
 }
 
@@ -101,7 +103,7 @@ extension UIView {
 
 extension BreweryTableCell: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
-                UIApplication.shared.open(URL)
-                return false
-            }
+        UIApplication.shared.open(URL)
+        return false
+    }
 }
