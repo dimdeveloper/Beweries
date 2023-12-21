@@ -119,13 +119,13 @@
                                                                             <rect key="frame" x="0.0" y="53" width="359" height="50"/>
                                                                             <subviews>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Phone:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qtg-ck-udw">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="39.5" height="50"/>
-                                                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="50"/>
+                                                                                    <fontDescription key="fontDescription" name="IowanOldStyleBT-Roman" family="IowanOldSt BT" pointSize="0.0"/>
                                                                                     <color key="textColor" red="0.27058823529411763" green="0.27058823529411763" blue="0.27058823529411763" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iea-7u-P0k">
-                                                                                    <rect key="frame" x="44.5" y="0.0" width="314.5" height="50"/>
+                                                                                    <rect key="frame" x="5" y="0.0" width="354" height="50"/>
                                                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                                     <nil key="textColor"/>
                                                                                     <nil key="highlightedColor"/>
