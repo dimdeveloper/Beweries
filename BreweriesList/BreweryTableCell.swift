@@ -22,20 +22,27 @@ class BreweryTableCell: UITableViewCell {
     @IBOutlet weak var stateLabelView: UIView!
     @IBOutlet weak var cityLabelView: UIView!
     @IBOutlet weak var streetLabelView: UIView!
-    
     @IBOutlet weak var country: UILabel!
     @IBOutlet weak var state: UILabel!
     @IBOutlet weak var city: UILabel!
     @IBOutlet weak var street: UILabel!
+    
+    @IBOutlet weak var showOnMapButtonView: UIView!
+    @IBOutlet weak var showOnMapButton: UIButton!
+    
     let borderColor: CGColor = Constants.mainColor
+    var brewery: Brewery?
+    weak var delegate: ShowOnMap?
     
     func setup(brewery: Brewery){
         setupView()
+        setupShowOnMapButton(brewery: brewery)
+        
         self.name.forEach { label in
             label.text = brewery.name
         }
+        self.brewery = brewery
         self.phone.text = brewery.phone
-        
         self.country.text = brewery.country
         self.state.text = brewery.state
         self.city.text = brewery.city
@@ -46,7 +53,6 @@ class BreweryTableCell: UITableViewCell {
         self.stateLabelView.update(with: brewery.state)
         self.cityLabelView.update(with: brewery.city)
         self.streetLabelView.update(with: brewery.street)
-        
         self.webLink.textContainerInset = .zero
 
         guard let webLink = brewery.websiteUrl else {return}
@@ -64,6 +70,22 @@ class BreweryTableCell: UITableViewCell {
         infoView.layer.borderWidth = 1
         headerView.layer.borderColor = borderColor
         infoView.layer.borderColor = borderColor
+    }
+    
+    private func setupShowOnMapButton(brewery: Brewery){
+        guard let latitudeValue = brewery.latitude, let _ = Double(latitudeValue), let longtitudeValue = brewery.longtitude, let _ = Double(longtitudeValue) else {
+            self.showOnMapButtonView.isHidden = true
+            return
+        }
+        self.showOnMapButtonView.isHidden = false
+        self.showOnMapButton.addTarget(self, action: #selector(showOnMapButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc func showOnMapButtonTapped() {
+        guard let brewery = brewery else {
+            return
+        }
+        delegate?.didselect(breweryId: brewery.id)
     }
 }
 
